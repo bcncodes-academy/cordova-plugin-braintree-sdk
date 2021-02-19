@@ -209,6 +209,7 @@ public class BraintreeSdk extends CordovaPlugin implements BraintreeErrorListene
         DropInRequest dropInRequest = new DropInRequest()
                 .clientToken(token)
                 .vaultManager(vaultManager)
+                .disablePayPal()
                 .collectDeviceData(collectDeviceData);
         if (disableCard) {
             dropInRequest.disableCard();
@@ -222,7 +223,7 @@ public class BraintreeSdk extends CordovaPlugin implements BraintreeErrorListene
     private void fetchDropInResult(JSONArray args) throws JSONException {
         String clientToken = args.getString(0);
 
-        DropInResult.fetchDropInResult(cordova.getActivity(), clientToken, new DropInResult.DropInResultListener() {
+        DropInResult.fetchDropInResult((AppCompatActivity) cordova.getActivity(), clientToken, new DropInResult.DropInResultListener() {
             @Override
             public void onError(Exception exception) {
                 // an error occurred
@@ -331,7 +332,7 @@ public class BraintreeSdk extends CordovaPlugin implements BraintreeErrorListene
         BraintreeFragment mBraintreeFragment;
 
         try {
-            mBraintreeFragment = BraintreeFragment.newInstance(cordova.getActivity(), token);
+            mBraintreeFragment = BraintreeFragment.newInstance((AppCompatActivity) cordova.getActivity(), token);
             // mBraintreeFragment is ready to use!
         } catch (Exception e) {
             // There was an issue with your authorization string.
