@@ -209,7 +209,7 @@ public class BraintreeSdk extends CordovaPlugin implements BraintreeErrorListene
         DropInRequest dropInRequest = new DropInRequest()
                 .clientToken(token)
                 .vaultManager(vaultManager)
-                .disablePayPal()
+                /* .disablePayPal() */
                 .collectDeviceData(collectDeviceData);
         if (disableCard) {
             dropInRequest.disableCard();
